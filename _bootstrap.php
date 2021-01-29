@@ -160,8 +160,8 @@ function proxyCall($path) {
     
     echo $gatewayUrl . path;
     echo $_SERVER['REQUEST_METHOD'];
-    echo $payload
-    echo $headers
+    echo $payload;
+    echo $headers;
 
     // proxy authenticated request
     $response = doRequest($gatewayUrl . $path, $_SERVER['REQUEST_METHOD'], $payload, $headers);
