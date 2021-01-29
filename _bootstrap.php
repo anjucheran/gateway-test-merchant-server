@@ -158,7 +158,7 @@ function proxyCall($path) {
     // get json payload from request
     $payload = getJsonPayload();
     
-    echo $gatewayUrl . path;
+    echo $gatewayUrl . $path;
     echo $_SERVER['REQUEST_METHOD'];
     echo $payload;
     echo $headers;
