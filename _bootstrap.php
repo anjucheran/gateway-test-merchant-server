@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-error_reporting('all');
+error_reporting(E_ALL);
 
 // pull environment vars
 $merchantId = "TESTBARISTACOLKR";
