@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-error_reporting(E_ALL);
+error_reporting('all');
 
 // pull environment vars
-$merchantId = getenv('GATEWAY_MERCHANT_ID');
-$password = getenv('GATEWAY_API_PASSWORD');
-$region = getenv('GATEWAY_REGION');
-$apiVersion = getenv('GATEWAY_API_VERSION');
+$merchantId = "TESTBARISTACOLKR";
+$password = "a01dfa3f97667ec237288bd4d137216b";
+$region = "ASIA_PACIFIC";
+$apiVersion = "49";
 
 // merchant id must be TEST
 $merchantIdPrefix = substr($merchantId, 0, 4);
@@ -55,8 +55,8 @@ if (intval($apiVersion) < 39) {
     error(500, "API Version must be >= 39");
 }
 
-// build api endpoint url
-$gatewayUrl = "https://${prefix}gateway.mastercard.com/api/rest/version/${apiVersion}/merchant/${merchantId}";
+// build api endpoint url 
+$gatewayUrl = "https://cbcmpgs.gateway.mastercard.com/api/rest/version/${apiVersion}/merchant/${merchantId}";
 
 // parse query string
 $query = array();
@@ -125,13 +125,10 @@ function getJsonPayload() {
 }
 
 function decodeResponse($response) {
-    echo $response;
     $decoded = json_decode($response, true);
     if (json_last_error() !== JSON_ERROR_NONE) {
         error(400, 'Could not decode json response from gateway');
     }
-    
-    echo $decoded;
 
     return $decoded;
 }
@@ -157,11 +154,6 @@ function proxyCall($path) {
 
     // get json payload from request
     $payload = getJsonPayload();
-    
-    error_log( $gatewayUrl . $path );
-    error_log($_SERVER['REQUEST_METHOD']);
-    error_log( print_r($payload, TRUE) );
-    error_log(print_r($headers, TRUE));
 
     // proxy authenticated request
     $response = doRequest($gatewayUrl . $path, $_SERVER['REQUEST_METHOD'], $payload, $headers);
